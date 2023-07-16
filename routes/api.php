@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\API\UserController;
+use \App\Http\Controllers\API\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,9 +27,9 @@ Route::prefix('/v1/users')->group(function(){
 		// Update user data without profile_picture
 		Route::put('/update/{id}', 'updateUserNoPicture');
 		// Update picture profile user by id
-		Route::put('/picture-update/{id}', 'updatePictureProfile');
+		Route::patch('/picture-update/{id}', 'updatePictureProfile');
 		// Update password user by id
-		Route::put('/password-update/{id}', 'updatePasswordUser');
+		Route::patch('/password-update/{id}', 'updatePasswordUser');
 		// Update status user by id
 		Route::patch('/status-update/{id}', 'updateStatusUser');
 		// Delete user data by id

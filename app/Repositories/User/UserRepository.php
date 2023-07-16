@@ -20,6 +20,7 @@ class UserRepository
 		$this->user->address = $request->address;
 		$this->user->username = $request->username;
 		$this->user->password = password_hash($request->password, PASSWORD_DEFAULT);
+		$this->user->status_aktivasi = "Tidak Aktif";
 		$this->user->save();
 		return $this->user;
 	}
@@ -34,6 +35,7 @@ class UserRepository
 			$this->user->username = $request->username;
 			$this->user->password = password_hash($request->password, PASSWORD_DEFAULT);
 			$this->user->profile_picture = $namafile;
+			$this->user->status_aktivasi = "Tidak Aktif";
 			$this->user->save();
 
 			return $this->user;

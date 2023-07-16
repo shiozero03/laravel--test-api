@@ -11,10 +11,15 @@ class AuthRepository
 	public function loginUser($request){
 		$user = $this->user->where('username', $request->username)->first();
 		if($user){
-			if (password_verify($request->password, $user->password)) {
-				return $user;
+			if($user->status_aktivasi == "Aktif"){
+				if (password_verify($request->password, $user->password)) {
+					return $user;
+				} else {
+					$errors = ['error' => 'Password tidak sesuai'];
+					return $errors;
+				}
 			} else {
-				$errors = ['error' => 'Password tidak sesuai'];
+				$errors = ['error' => 'Status akun belum aktif'];
 				return $errors;
 			}
 		} else {
@@ -28,6 +33,7 @@ class AuthRepository
 		$this->user->address = $request->address;
 		$this->user->username = $request->username;
 		$this->user->password = password_hash($request->password, PASSWORD_DEFAULT);
+		$this->user->status_aktivasi = "Tidak Aktif";
 		$this->user->save();
 		return $this->user;
 	}

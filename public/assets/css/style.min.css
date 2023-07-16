@@ -1,0 +1,39 @@
+*{
+	font-family: 'arial'
+}
+.borderradius-10{
+	border-radius: 10px;
+}
+nav.navbar{
+	box-shadow: 0px 2px 10px #D4D4D4;
+}
+.bg-primary-1{
+	background-color: #0B3BA1;
+}
+.bg-warning-1{
+	background-color: #FFCB42;
+}
+.btn-primary-1{
+	background-color: #0B3BA1;
+}
+.text-primary-1{
+	color: #0B3BA1;
+}
+.border-bottom-primary-4{
+	border-bottom: 4px solid #0B3BA1;
+}
+.nav-link{
+	color: #000000;
+}
+.nav-link:hover{
+	color: #0B3BA1;
+}
+.nav-link.active{
+	color: #0B3BA1;	
+}
+@media screen and (min-width: 992px){
+	.informasi-alumni{
+		width: 60%;
+		margin-left: 20%
+	}
+}

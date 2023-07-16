@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(AuthController::class)->group(function(){
+	Route::get('/', 'login')->name('auth.login');
+	Route::get('/register', 'register')->name('auth.register');
+	Route::get('/lupa-password', 'lupaPassword')->name('auth.lupaPassword');
+});
+Route::middleware('CheckCookie')->group(function(){
+	Route::controller(UserController::class)->group(function(){
+		Route::prefix('/crud')->group(function(){
+			Route::get('/', 'index')->name('crud.dashboard');
+			Route::get('/profile', 'profil')->name('crud.profil');
+		});
+	});
 });

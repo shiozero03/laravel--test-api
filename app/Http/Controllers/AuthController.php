@@ -9,64 +9,13 @@ use Validator;
 
 class AuthController extends Controller
 {
-	public function  __construct(){
-    	$this->authRep = new AuthRepository;
-    }
-    public function loginUser(Request $request){
-    	$rules = array(
-	        'username' => 'required',
-	        'password' => 'required'
-    	);
-    	$validated = Validator::make($request->all(), $rules);
-
-	    if ($validated->fails()) {
-	    	$errors = $validated->errors();
-	    	return new BaseResource('error', 422, 'Validasi user gagal', null, $errors);
-	    } else {
-	    	$result = $this->authRep->loginUser($request);
-	    	if($result['error']){
-	    		return new BaseResource('error', 422, 'Login gagal', null, $result);
-	    	}
-	    	if($result['error']) {
-	    		return new BaseResource('error', 422, 'Login gagal', null, $result);
-	    	}
-	    	return new BaseResource('success', 200, 'Login berhasil', $result);
-	    }
-    }
-    public function registerUser(Request $request){
-    	$rules = array(
-	        'username' => 'required|unique:users',
-	        'email' => 'required|email|unique:users',
-	        'password' => 'required',
-	        'name' => 'required',
-	        'address' => 'required'
-    	);
-    	$validated = Validator::make($request->all(), $rules);
-
-	    if ($validated->fails()) {
-	    	$errors = $validated->errors();
-	    	return new BaseResource('error', 422, 'Validasi user gagal', null, $errors);
-	    } else {
-	    	$result = $this->authRep->registerUser($request);
-	    	return new BaseResource('success', 200, 'Data user berhasil ditambahkan', $result);
-	    }
-    }
-    public function forgotPassword(Request $request){
-    	$rules = array(
-	        'email' => 'required|email'
-    	);
-    	$validated = Validator::make($request->all(), $rules);
-
-	    if ($validated->fails()) {
-	    	$errors = $validated->errors();
-	    	return new BaseResource('error', 422, 'Validasi user gagal', null, $errors);
-	    } else {
-	    	$result = $this->authRep->forgotPassword($request);
-	    	if($result){
-	    		return new BaseResource('success', 200, 'Email berhasil ditemukan', $result);
-	    	} else {
-	    		return new BaseResource('error', 200, 'Email tidak terdaftar', null, "Email yang anda cari tidak dapat ditemukan");
-	    	}
-	    }
-    }
+	public function login(){
+		return view('pages.auth.login');
+	}
+	public function register(){
+		return view('pages.auth.register');	
+	}
+	public function lupaPassword(){
+		return view('pages.auth.lupa-password');	
+	}
 }
